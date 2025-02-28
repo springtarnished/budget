@@ -1,0 +1,999 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+:root {
+  /* Midcentury Modern Color Palette */
+  --primary: #e76f51;
+  --primary-light: #f4a261;
+  --primary-dark: #bc5639;
+  --secondary: #2a9d8f;
+  --tertiary: #e9c46a;
+  --accent: #264653;
+  --success: #3d9970;
+  --warning: #e9c46a;
+  --danger: #e76f51;
+
+  /* Neutrals */
+  --cream: #f8f4e3;
+  --sand: #eae2b7;
+  --coffee: #774936;
+  --gray-100: #f8f9fa;
+  --gray-200: #eae2b7;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #403d39;
+  --gray-900: #252422;
+
+  --card-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+  --vh: 1vh; /* Custom viewport height for mobile */
+
+  /* Midcentury Modern Design Variables */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+  --spacer: 1rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cream);
+  color: var(--gray-800);
+  line-height: 1.6;
+  padding: 0.5rem;
+  font-size: 15px;
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+  /* Mobile viewport bug fix */
+  min-height: -webkit-fill-available;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem;
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--gray-200);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spinner 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dashboard Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.dashboard-summary {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.category-visualization {
+  grid-column: span 12;
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.category-visualization::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  background: var(--primary-light);
+  opacity: 0.1;
+  border-radius: 0 0 0 100%;
+  z-index: 0;
+}
+
+.paycheck-progress {
+  grid-column: span 12;
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.paycheck-progress::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  background: var(--secondary);
+  opacity: 0.1;
+  border-radius: 0 100% 0 0;
+  z-index: 0;
+}
+
+.paycheck-section {
+  grid-column: span 12;
+  position: relative;
+}
+
+/* Header Styles */
+.dashboard-header {
+  background: linear-gradient(120deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius-lg);
+  text-align: center;
+  position: relative;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.dashboard-header::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.dashboard-header::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.dashboard-header h1 {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-header i {
+  margin-right: 8px;
+}
+
+.month-selector-container {
+  margin: 0.75rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.month-selector {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: var(--border-radius-md);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='18px' height='18px'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+  min-height: 44px; /* Minimum touch target size */
+  width: 180px;
+}
+
+.month-selector:hover, .month-selector:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+  outline: none;
+}
+
+.current-month {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Summary Cards */
+.summary-card {
+  background: white;
+  border-radius: var(--border-radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+  min-height: 80px;
+  border-bottom: 4px solid transparent;
+}
+
+.summary-card:hover, .summary-card:active {
+  transform: translateY(-5px);
+}
+
+.total-income {
+  border-bottom-color: var(--primary);
+}
+
+.total-bills {
+  border-bottom-color: var(--secondary);
+}
+
+.remaining {
+  border-bottom-color: var(--tertiary);
+}
+
+.bill-ratio {
+  border-bottom-color: var(--accent);
+}
+
+.summary-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.total-income .summary-icon {
+  background-color: var(--primary);
+  color: white;
+}
+
+.total-bills .summary-icon {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.remaining .summary-icon {
+  background-color: var(--tertiary);
+  color: var(--gray-800);
+}
+
+.bill-ratio .summary-icon {
+  background-color: var(--accent);
+  color: white;
+}
+
+.summary-content {
+  min-width: 0; /* Allow text to compress in small spaces */
+  flex: 1;
+}
+
+.summary-content h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+}
+
+.summary-content p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mini Progress Bar */
+.mini-progress {
+  height: 4px;
+  background-color: var(--gray-200);
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.mini-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--tertiary), var(--primary));
+  border-radius: 2px;
+}
+
+/* Section Headings */
+.section-heading {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: var(--gray-800);
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.section-heading i {
+  margin-right: 10px;
+  color: var(--primary);
+}
+
+/* Paycheck Cards */
+.paycheck-card {
+  background: white;
+  border-radius: var(--border-radius-lg);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  overflow: hidden;
+  border-left: 6px solid var(--secondary);
+}
+
+.paycheck-card:hover, .paycheck-card:active, .paycheck-card.touch-active {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Paycheck Header */
+.paycheck-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-200);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background-color: rgba(248, 244, 227, 0.4);
+}
+
+.paycheck-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.paycheck-header h3 i {
+  margin-right: 8px;
+  color: var(--secondary);
+}
+
+.paycheck-amount-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paycheck-amount {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  background-color: rgba(231, 111, 81, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--border-radius-md);
+}
+
+/* Edit Amount Features */
+.edit-amount-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.9rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  background-color: var(--cream);
+}
+
+.edit-amount-btn:hover {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.edit-amount-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.edit-amount-input {
+  width: 100px;
+  padding: 0.4rem 0.6rem;
+  border: 2px solid var(--tertiary);
+  border-radius: var(--border-radius-md);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gray-800);
+  -moz-appearance: textfield; /* Remove arrows in Firefox */
+}
+
+.edit-amount-input::-webkit-outer-spin-button,
+.edit-amount-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.save-amount-btn, .cancel-edit-btn {
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--border-radius-md);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.save-amount-btn {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.save-amount-btn:hover {
+  background-color: #238b7e;
+}
+
+.cancel-edit-btn {
+  background-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+.cancel-edit-btn:hover {
+  background-color: var(--gray-300);
+}
+
+/* Highlight card when editing */
+.paycheck-card.editing {
+  border-left-color: var(--tertiary);
+  box-shadow: 0 0 0 2px var(--tertiary);
+}
+
+/* Allocation Bar */
+.allocation-summary {
+  padding: 1rem 1.5rem;
+  background-color: white;
+}
+
+.allocation-bar {
+  height: 8px;
+  background-color: var(--gray-200);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.allocation-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary), var(--primary));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.allocation-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--gray-700);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Bill List */
+.bill-list {
+  padding: 0.5rem 1rem 1rem;
+}
+
+.bill-category {
+  border-left: 4px solid var(--gray-300);
+  padding: 0.5rem 0 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.category-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-right: 10px;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.category-header h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  font-family: 'Work Sans', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.category-bills {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+
+.category-bills.mobile-grid {
+  grid-template-columns: 1fr; /* Single column on mobile */
+}
+
+.bill-item {
+  background-color: rgba(248, 244, 227, 0.4);
+  border-radius: var(--border-radius-md);
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 0.5rem;
+  transition: var(--transition);
+  min-height: 44px; /* Minimum touch target height */
+}
+
+.bill-item:hover, .bill-item:active {
+  background-color: var(--gray-200);
+}
+
+.bill-name {
+  font-weight: 600;
+  color: var(--gray-800);
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.bill-amount {
+  font-weight: 700;
+  color: var(--primary);
+  grid-column: 2;
+  grid-row: 1;
+  text-align: right;
+}
+
+.bill-due {
+  font-size: 0.8rem;
+  color: var(--gray-600);
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.bill-status {
+  grid-column: 2;
+  grid-row: 2;
+  text-align: right;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.bill-on-time {
+  color: var(--success);
+}
+
+.bill-late {
+  color: var(--danger);
+}
+
+.bill-status i {
+  margin-left: 4px;
+}
+
+.no-bills {
+  padding: 2rem;
+  text-align: center;
+  color: var(--gray-500);
+  font-style: italic;
+}
+
+.no-bills i {
+  margin-right: 8px;
+}
+
+/* Pie Chart */
+.category-chart {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.pie-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: var(--gray-200);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.pie-segment {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.chart-legend {
+  flex: 1;
+  min-width: 200px;
+}
+
+.legend-item {
+  display: grid;
+  grid-template-columns: 16px 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--border-radius-sm);
+}
+
+.legend-name {
+  color: var(--gray-700);
+  font-weight: 500;
+}
+
+.legend-amount {
+  color: var(--gray-900);
+  font-weight: 600;
+  text-align: right;
+}
+
+.legend-percent {
+  color: var(--gray-600);
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+/* Paycheck Progress */
+.paycheck-progress-item {
+  margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--gray-700);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.progress-bar {
+  height: 10px;
+  background-color: var(--gray-200);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary), var(--tertiary));
+  width: 0;
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+.progress-fill.almost-full {
+  background: linear-gradient(90deg, var(--tertiary), var(--primary));
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  font-family: 'Work Sans', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.geometric-pattern {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--primary) 0,
+    var(--primary) 10px,
+    var(--secondary) 10px,
+    var(--secondary) 20px,
+    var(--tertiary) 20px,
+    var(--tertiary) 30px
+  );
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  .dashboard-header {
+    padding: 2rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .current-month {
+    font-size: 1.5rem;
+  }
+
+  .category-visualization {
+    grid-column: span 6;
+  }
+
+  .paycheck-progress {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 767px) {
+  .dashboard-grid {
+    gap: 1rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .month-selector {
+    width: 160px;
+  }
+
+  .current-month {
+    font-size: 1.2rem;
+  }
+
+  .section-heading {
+    font-size: 1.1rem;
+  }
+
+  /* Make pie chart smaller on mobile */
+  .pie-container {
+    width: 150px;
+    height: 150px;
+  }
+
+  .legend-item {
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .paycheck-header {
+    padding: 1rem;
+  }
+
+  .paycheck-header h3 {
+    font-size: 1rem;
+  }
+
+  .allocation-summary {
+    padding: 0.75rem 1rem;
+  }
+
+  .bill-list {
+    padding: 0.5rem 0.75rem 0.75rem;
+  }
+
+  .bill-item {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .month-selector {
+    width: 140px;
+    font-size: 0.9rem;
+  }
+
+  .current-month {
+    font-size: 1.1rem;
+  }
+
+  .summary-content p {
+    font-size: 1.25rem;
+  }
+
+  .summary-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  /* Even smaller pie chart on very small devices */
+  .pie-container {
+    width: 120px;
+    height: 120px;
+  }
+
+  .legend-item {
+    display: grid;
+    grid-template-columns: 12px 1fr auto;
+    grid-template-rows: auto auto;
+  }
+
+  .legend-color {
+    width: 12px;
+    height: 12px;
+    grid-row: 1 / span 2;
+  }
+
+  .legend-name {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .legend-amount {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .legend-percent {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+    text-align: left;
+  }
+
+  .paycheck-amount {
+    font-size: 1.1rem;
+  }
+
+  .edit-amount-container {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .edit-amount-input {
+    flex: 1;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background-color: white;
+    color: black;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .dashboard-header {
+    background: none;
+    color: black;
+    box-shadow: none;
+    padding: 1rem 0;
+  }
+
+  .dashboard-summary, .category-visualization, .paycheck-progress, .paycheck-card {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .app-footer {
+    display: none;
+  }
+}
